@@ -14,20 +14,13 @@ F2=xy’z+x’y’z+w’xy+wx’y+wxy
 
 
 ## Theory
- Logic gates are electronic circuits which perform logical functions on one or more inputs to produce one output.
+Logic gates are electronic circuits which perform logical functions on one or more inputs to produce one output.
 
-## Using NAND gates
-NAND gate is actually a combination of two logic gates i.e. AND gate followed by NOT gate. So its output is complement of the output of an AND gate.This gate can have minimum two inputs, output is always one. By using only NAND gates, we can realize all logic functions: AND, OR, NOT, X-OR, X-NOR, NOR. So this gate is also called as universal gate. First note that the entire expression is inverted and we have three terms ANDed. This means that we must use a 3-input NAND gate. Each of the three terms is, itself, a NAND expression. Finally, negated single terms can be generates with a 2-input NAND gate acting as an inverted.
+Logic gates are electronic circuits which perform logical functions on one or more inputs to produce one output. F1= A’B’C’D’+AC’D’+B’CD’+A’BCD+BC’D F2=xy’z+x’y’z+w’xy+wx’y+wxy
 
-F=((C'.B.A)'(D'.C.A)'(C.B'.A)')'
+1.AND gate The AND gate is an electronic circuit that gives a high output (1) only if all its inputs are high. A dot (.) is used to show the AND operation i.e. A.B or can be written as AB Y= A.B
 
-## Using NOR GATES
-NOR gate is actually a combination of two logic gates: OR gate followed by NOT gate. So its output is complement of the output of an OR gate. This gate can have minimum two inputs, output is always one. By using only NOR gates, we can realize all logic functions: AND, OR, NOT, Ex-OR, Ex-NOR, NAND. So this gate is also called universal gate. Designing a circuit with NOR gates only uses the same basic techniques as designing a circuit with NAND gates; that is, the application of deMorgan’s theorem. The only difference between NOR gate design and NAND gate design is that the former must eliminate product terms and the later must eliminate sum terms.
-
-F=(((C.B'.A)+(D.C'.A)+(C.B'.A))')'
-
-## Logic Diagram
-![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/0b49e589-62a9-4f98-898e-9bb525265e89)
+2.OR gate The OR gate is an electronic circuit that gives a high output (1) if one or more of its inputs are high. A plus (+) is used to show the OR operation. Y= A+B
 
 ## Procedure
 1.Create a project with required entities.
@@ -42,30 +35,55 @@ F=(((C.B'.A)+(D.C'.A)+(C.B'.A))')'
 
 6.Give the respective inputs for timing diagram and obtain the results.
 ## Program:
-/*
+
 Program to implement the given logic function and to verify its operations in quartus using Verilog programming.
+```
 Developed by: R.Joyce Beulah
 RegisterNumber:  212222230058
-*/
+```
+## F1= A’B’C’D’+AC’D’+B’CD’+A’BCD+BC’D
+```
+module f1(A,B,C,D,F1);
+input A,B,C,D;
+output F1;
+wire p,q,r,s,t;
+assign p = (~A & ~B & ~C & ~D);
+assign q = (A & ~C & ~D);
+assign r = (~B & C & ~D);
+assign s = (~A & B & C & D);
+assign t = (B & ~C & D);
+assign F1 = p | q | r | s | t;
+endmodule
+```
+## F2=xy’z+x’y’z+w’xy+wx’y+wxy
+```
+module imp(w,x,y,z,F2);
+input w,x,y,z;
+output F2;
+wire p,q,r,s,t;
+assign p= (x & ~y & z);
+assign q= (~x & ~y & z);
+assign r= (~w & x & y);
+assign s= (w & ~x & y);
+assign t= (w & x & y);
+assign F2= p | q | r | s | t;
+endmodule
+```
+
 ## RTL 
-NAND combination :
+## F1 :
+![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/18b8287b-9b39-4c2b-91f8-8f75599fb6d0)
 
-![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/17d3a272-62ac-4dd7-beeb-da6522cad07e)
+## F2 :
+![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/7a1b00ef-4702-4f1f-9b09-90da1a591df3)
 
-NOR combination :
-
-![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/211c6291-ee50-471c-a35b-63f3018f407a)
 
 ## Timing Diagram
-NAND combination :
+## F1 :
+![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/6f1f988b-2bf0-49bd-9029-d6c797580d3c)
 
-![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/45deb2ca-5915-4011-befd-1b357af6b267)
-
-
-NOR combination :
-
-![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/b5924734-36b6-482c-95f1-a16f5411b0bf)
-
+## F2 :
+![image](https://github.com/JoyceBeulah/Experiment--02-Implementation-of-combinational-logic-/assets/118343698/7b9435ba-916f-4ad7-ace7-fa462737cda2)
 
 ## Result:
 Thus the given logic functions are implemented using  and their operations are verified using Verilog programming.
